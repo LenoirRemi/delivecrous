@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 
-class TileItem extends StatelessWidget {
-  
-  const TileItem(this.text);
+class TileItem extends StatefulWidget {
+  const TileItem(this.text, this.imagepath);
   
   final String text;
+  final String imagepath;
+
+  @override
+  _TileItemState createState() => new _TileItemState();
+}
+  
+class _TileItemState extends State<TileItem> {
+  
+  bool _isChecked = false;
+
+  void _valueChanged(bool value) => setState(() => _isChecked = value);
 
   @override
   Widget build(BuildContext context){
@@ -13,7 +23,7 @@ class TileItem extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Image(
-            image: AssetImage("assets/images/any.jpeg"),
+            image: AssetImage(widget.imagepath),
             alignment: Alignment.topCenter,
             fit: BoxFit.fitWidth
           ),
@@ -22,12 +32,12 @@ class TileItem extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Center(
-                   child: Text(text), 
+                   child: Text(widget.text), 
                   )
                 ),
                 Checkbox(
-                  value: false,
-                  onChanged: null
+                  value: _isChecked,
+                  onChanged: _valueChanged
                 )
               ],
             ),
