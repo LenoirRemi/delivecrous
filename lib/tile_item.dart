@@ -22,7 +22,7 @@ class TileItem extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Center(
-                   child: Text("LOREM ..."), 
+                   child: Text(text), 
                   )
                 ),
                 Checkbox(
