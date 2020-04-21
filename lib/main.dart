@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:delivecrous/tile_item.dart';
+import 'package:delivecrous/shop_cart.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MaterialApp(
+  title: 'DelivecrousApp',
+  home: Home(),
+));
 
-class MyApp extends StatelessWidget {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context){
-    return MaterialApp(
-      title: 'Delivecrous',
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: Text('Delivecrous')
+          title: Text('Delivecrous'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.shopping_cart,
+                color: Colors.white,
+                size: 34.0,
+              ), onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ShopCart()),
+                );
+              },
+            )],
         ),
         body: Container(
           padding: EdgeInsets.all(8.0),
@@ -36,7 +51,6 @@ class MyApp extends StatelessWidget {
             ],
           ),
         )
-      )
-    );
+      );
   }
 }
