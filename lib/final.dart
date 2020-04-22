@@ -11,7 +11,7 @@ class Final extends StatelessWidget {
         margin: const EdgeInsets.all(12.0),
         child: Column(
           children: <Widget>[
-            Text("Votre commande a bien était enregistrée",
+            Text("Votre commande a bien été enregistrée.",
               style: TextStyle(
                 height: 2,
                 fontSize: 20,
