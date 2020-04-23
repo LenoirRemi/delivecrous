@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TileItem extends StatefulWidget {
-  const TileItem(this.text, this.imagepath);
+  const TileItem(this.text, this.imagepath, this.price);
   
   final String text;
   final String imagepath;
+  final double price;
 
   @override
   _TileItemState createState() => new _TileItemState();
@@ -20,19 +21,31 @@ class _TileItemState extends State<TileItem> {
   Widget build(BuildContext context){
     return Card(
       elevation: 4.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0)
+      ),
       child: Column(
         children: <Widget>[
-          Image(
-            image: AssetImage(widget.imagepath),
-            alignment: Alignment.topCenter,
-            fit: BoxFit.fitWidth
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8.0), 
+              topRight: Radius.circular(8.0)
+            ),
+            child: Image(
+              image: AssetImage(widget.imagepath),
+              alignment: Alignment.topCenter,
+              fit: BoxFit.fitWidth
+            ),
           ),
           Center(
             child: Row(
               children: <Widget>[
                 Expanded(
                   child: Center(
-                   child: Text(widget.text), 
+                   child: Text(
+                    widget.text,
+                    style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.3)
+                   ), 
                   )
                 ),
                 Checkbox(
@@ -41,7 +54,17 @@ class _TileItemState extends State<TileItem> {
                 )
               ],
             ),
-          )
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 6.0, bottom: 6.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                widget.price.toString() + " €",
+                style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.5)
+              ),
+            ),
+          ),
         ],
       ),
     );
