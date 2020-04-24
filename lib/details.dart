@@ -16,8 +16,24 @@ class Details extends StatefulWidget {
   
 class _DetailsState extends State<Details> {
   
-  //bool _isChecked = false;
-  //void _valueChanged(bool value) => setState(() => _isChecked = value);
+  bool _isChecked = false;
+  void _valueChanged(bool value) => setState(() => _isChecked = value);
+
+  bool _priceColor = true;
+  ScrollController _scrollController;
+
+  _scrollListener(){
+    setState(() {
+      _priceColor = (_scrollController.position.pixels < (MediaQuery.of(context).size.height / 4)) ? true : false;
+    });
+  }
+
+  @override
+  void initState(){
+    _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context){
@@ -49,16 +65,12 @@ class _DetailsState extends State<Details> {
             )
           ),
           child: SingleChildScrollView(
+            controller: _scrollController,
             padding: EdgeInsets.all(12.0),
             child: Column(
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(left: 25.0, right: 25.0),
-                  //child: Image(
-                  //  image: AssetImage(widget.imagepath),
-                  //  alignment: Alignment.topCenter,
-                  //  fit: BoxFit.fitWidth,
-                  //)
                   child: Card(
                     elevation: 8.0,
                     shape: RoundedRectangleBorder(
@@ -91,13 +103,28 @@ class _DetailsState extends State<Details> {
                         borderRadius: BorderRadius.circular(50.0)
                       ),
                       child: Checkbox(
-                        value: false, 
-                        onChanged: null
+                        value: _isChecked, 
+                        onChanged: _valueChanged
                       )
                     )
                   ],
                 ),
                 Container(
+                  alignment: Alignment.centerLeft,
+                  child: AnimatedDefaultTextStyle(
+                    child: Text(widget.price.toStringAsFixed(2) + " €"),
+                    style: _priceColor ? TextStyle(
+                      color: Colors.white,
+                      fontSize: 25.0
+                    ): TextStyle(
+                      color: Colors.black,
+                      fontSize: 25.0
+                    ), 
+                    duration: Duration(milliseconds: 500)
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 4.0),
                   alignment: Alignment.centerLeft,
                   child: Text(widget.description,
                     style: TextStyle(

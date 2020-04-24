@@ -16,7 +16,7 @@ class AppCats {
         "name":"Hamilton",
         "image":"assets/images/3.jpg",
         "price":22000.0,
-        "description": "Hamilton is a rescue kitty adopted from the Humane Society in Silicon Valley.  His perfect mustache and human like facial expressions have made him an internet sensation and earned him recognition on various news programs/papers around the world."
+        "description": "Hamilton est un chaton adopté par la Humane Society dans la Silicon Valley.  Sa moustache parfaite et ses expressions faciales à caractère humain ont fait de lui une sensation sur Internet et lui ont valu d'être reconnu dans divers programmes et journaux d'information du monde entier."
     },
     {
         "name":"Venus",
