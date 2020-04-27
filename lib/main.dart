@@ -7,11 +7,8 @@ import 'package:delivecrous/common/colors.dart';
 import 'package:delivecrous/screens/tile_item.dart';
 import 'package:provider/provider.dart';
 
-void main() { 
-  runApp(MaterialApp(
-    title: 'DelivecrousApp',
-    home: Home(),
-  ));
+void main() {
+  runApp(Home());
 }
 
 class Home extends StatelessWidget {
@@ -26,7 +23,6 @@ class Home extends StatelessWidget {
       // of ChangeNotifierProvider. Moreover, CartModel depends
       // on CatalogModel, so a ProxyProvider is needed.
       ChangeNotifierProxyProvider<CatalogModel, CartModel>(
-        
         create: (context) => CartModel(),
         update: (context, catalog, cart) {
           cart.catalog = catalog;
@@ -34,44 +30,14 @@ class Home extends StatelessWidget {
         },
       ),
     ],
-    child: Scaffold(
-      appBar: AppBar(
-        title: Text('Delivecrous'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.shopping_cart,
-              color: Colors.white,
-              size: 34.0,
-            ), onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ShopCart()),
-              );
-            },
-          )],
+    child: MaterialApp(
+      title: 'APp title',
+      initialRoute: '/',
+      routes: {
+          '/': (context) => MyListItem(),
+          '/myCart': (context) => ShopCart(),
+        },
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [AppColors.gradientStart, AppColors.gradientMiddle, AppColors.gradientEnd],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            tileMode: TileMode.clamp
-          )
-        ),
-        child: StaggeredGridView.countBuilder(
-          padding: EdgeInsets.all(8.0),
-          itemCount: 10,
-          primary: false,
-          crossAxisCount: 2,
-          mainAxisSpacing: 4.0,
-          crossAxisSpacing: 4.0,
-          itemBuilder: (context, index) => TileListItem(index),
-          staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-        ),
-      )
-     ),
     );
   }
 }

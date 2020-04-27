@@ -67,8 +67,9 @@ class CatalogModel {
   /// Get item by [id].
   ///
   /// In this sample, the catalog is infinite, looping over [_cats].
-  Item getById(int id) => Item(id, _cats[id]["name"], _cats[id]["image"], _cats[id]["price"], _cats[id]["description"]);
-
+  Item getById(int id){
+    return Item(id, _cats[id]["name"], _cats[id]["image"], _cats[id]["price"], _cats[id]["description"]);
+  }
   /// Get item by its position in the catalog.
   Item getByPosition(int position) {
     // In this simplified case, an item's position in the catalog

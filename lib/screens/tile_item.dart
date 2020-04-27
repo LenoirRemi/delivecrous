@@ -1,7 +1,9 @@
+import 'package:delivecrous/common/colors.dart';
 import 'package:delivecrous/models/cart_model.dart';
 import 'package:delivecrous/models/catalog_model.dart';
 import 'package:flutter/material.dart';
 import 'package:delivecrous/screens/details.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer';
   
@@ -78,6 +80,34 @@ class TileListItem extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class MyListItem extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+    body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.gradientStart, AppColors.gradientMiddle, AppColors.gradientEnd],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            tileMode: TileMode.clamp
+          )
+        ),
+        child: StaggeredGridView.countBuilder(
+          padding: EdgeInsets.all(8.0),
+          itemCount: 10,
+          primary: false,
+          crossAxisCount: 2,
+          mainAxisSpacing: 4.0,
+          crossAxisSpacing: 4.0,
+          itemBuilder: (context, index) => TileListItem(index),
+          staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+        ),
       ),
     );
   }
