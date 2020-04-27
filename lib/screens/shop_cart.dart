@@ -23,7 +23,6 @@ class ShopCart extends StatelessWidget {
             tileMode: TileMode.clamp
           )
         ),
-        child: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(10.0),
             child: Column(
@@ -141,7 +140,6 @@ class ShopCart extends StatelessWidget {
             ),
             ),
           ),
-        ),
       );
     }
 }
