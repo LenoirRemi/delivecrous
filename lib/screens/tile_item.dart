@@ -1,26 +1,22 @@
+import 'package:delivecrous/models/cart_model.dart';
+import 'package:delivecrous/models/catalog_model.dart';
 import 'package:flutter/material.dart';
-import 'package:delivecrous/details.dart';
-
-class TileItem extends StatefulWidget {
-  const TileItem(this.text, this.imagepath, this.price, this.description);
+import 'package:delivecrous/screens/details.dart';
+import 'package:provider/provider.dart';
+import 'dart:developer';
   
-  final String text;
-  final String imagepath;
-  final double price;
-  final String description;
+class TileListItem extends StatelessWidget {
 
-  @override
-  _TileItemState createState() => new _TileItemState();
-}
-  
-class _TileItemState extends State<TileItem> {
-  
-  bool _isChecked = false;
+  final int index;
 
-  void _valueChanged(bool value) => setState(() => _isChecked = value);
+  TileListItem(this.index, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
+    var catalog = Provider.of<CatalogModel>(context);
+    var cart = Provider.of<CartModel>(context);
+    var item = catalog.getByPosition(index);
+
     return Card(
       elevation: 4.0,
       shape: RoundedRectangleBorder(
@@ -35,7 +31,7 @@ class _TileItemState extends State<TileItem> {
                   topRight: Radius.circular(8.0)
                 ),
                 child: Image(
-                  image: AssetImage(widget.imagepath),
+                  image: AssetImage(item.image),
                   alignment: Alignment.topCenter,
                   fit: BoxFit.fitWidth
                 ),
@@ -43,7 +39,7 @@ class _TileItemState extends State<TileItem> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Details(widget.text, widget.imagepath, widget.price, widget.description)),
+                  MaterialPageRoute(builder: (context) => Details(index)),
                 );
               },
           ),
@@ -53,15 +49,21 @@ class _TileItemState extends State<TileItem> {
                 Expanded(
                   child: Center(
                    child: Text(
-                    widget.text,
+                    item.name,
                     style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.3)
                    ), 
                   )
                 ),
                 Checkbox(
-                  value: _isChecked,
-                  onChanged: _valueChanged
-                )
+                  value: cart.items.contains(item),
+                  onChanged: (bool newValue) {
+                    if(newValue){
+                      cart.add(item);
+                    }else{
+                      cart.remove(item);
+                    }
+                  },
+                ),
               ],
             ),
           ),
@@ -70,7 +72,7 @@ class _TileItemState extends State<TileItem> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                widget.price.toStringAsFixed(2) + " €",
+                item.price.toStringAsFixed(2) + " €",
                 style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.5)
               ),
             ),

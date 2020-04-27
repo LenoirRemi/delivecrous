@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:delivecrous/colors.dart';
+import 'package:delivecrous/common/colors.dart';
 
 class Final extends StatelessWidget {
   @override

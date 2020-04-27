@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:delivecrous/shop_cart.dart';
-import 'package:delivecrous/colors.dart';
+import 'package:delivecrous/screens/shop_cart.dart';
+import 'package:delivecrous/common/colors.dart';
+import 'package:delivecrous/models/catalog_model.dart';
+import 'package:delivecrous/models/cart_model.dart';
+import 'package:provider/provider.dart';
 
 class Details extends StatefulWidget {
-  const Details(this.text, this.imagepath, this.price, this.description);
   
-  final String text;
-  final String imagepath;
-  final double price;
-  final String description;
+  final int index;
+
+  Details(this.index, {Key key}) : super(key: key);
 
   @override
   _DetailsState createState() => new _DetailsState();
 }
+
   
 class _DetailsState extends State<Details> {
-  
-  bool _isChecked = false;
-  void _valueChanged(bool value) => setState(() => _isChecked = value);
 
   bool _priceColor = true;
   ScrollController _scrollController;
@@ -37,6 +36,10 @@ class _DetailsState extends State<Details> {
 
   @override
   Widget build(BuildContext context){
+    var catalog = Provider.of<CatalogModel>(context);
+    var cart = Provider.of<CartModel>(context);
+    var item = catalog.getByPosition(widget.index);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('Delivecrous'),
@@ -79,7 +82,7 @@ class _DetailsState extends State<Details> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(25.0)),
                       child: Image(
-                        image: AssetImage(widget.imagepath),
+                        image: AssetImage(item.image),
                         alignment: Alignment.topCenter,
                         fit: BoxFit.fitWidth
                       ),
@@ -90,7 +93,7 @@ class _DetailsState extends State<Details> {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                        widget.text,
+                        item.name,
                         //style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.3)
                         style: TextStyle(
                           fontSize: 40.0,
@@ -103,16 +106,22 @@ class _DetailsState extends State<Details> {
                         borderRadius: BorderRadius.circular(50.0)
                       ),
                       child: Checkbox(
-                        value: _isChecked, 
-                        onChanged: _valueChanged
-                      )
+                        value: cart.items.contains(item),
+                        onChanged: (bool newValue) {
+                          if(newValue){
+                            cart.add(item);
+                          }else{
+                            cart.remove(item);
+                          }
+                        },
+                      ),
                     )
                   ],
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
                   child: AnimatedDefaultTextStyle(
-                    child: Text(widget.price.toStringAsFixed(2) + " €"),
+                    child: Text(item.price.toStringAsFixed(2) + " €"),
                     style: _priceColor ? TextStyle(
                       color: Colors.white,
                       fontSize: 25.0
@@ -126,7 +135,7 @@ class _DetailsState extends State<Details> {
                 Container(
                   margin: EdgeInsets.only(top: 4.0),
                   alignment: Alignment.centerLeft,
-                  child: Text(widget.description,
+                  child: Text(item.description,
                     style: TextStyle(
                       fontSize: 20.0,
                     )

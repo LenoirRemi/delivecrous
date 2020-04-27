@@ -1,5 +1,7 @@
-class AppCats {
-  static const cats = [
+import 'package:flutter/material.dart';
+
+class CatalogModel {
+  static const _cats = [
     {
         "name":"Grumpy",
         "image":"assets/images/1.jpg",
@@ -61,4 +63,34 @@ class AppCats {
         "description": "Un gros British Longhair roux."
     }
   ];
+
+  /// Get item by [id].
+  ///
+  /// In this sample, the catalog is infinite, looping over [_cats].
+  Item getById(int id) => Item(id, _cats[id]["name"], _cats[id]["image"], _cats[id]["price"], _cats[id]["description"]);
+
+  /// Get item by its position in the catalog.
+  Item getByPosition(int position) {
+    // In this simplified case, an item's position in the catalog
+    // is also its id.
+    return getById(position);
+  }
+}
+
+@immutable
+class Item {
+
+  final int id;
+  final String name;
+  final String image;
+  final double price;
+  final String description;
+
+  Item(this.id, this.name, this.image, this.price, this.description);
+
+  @override
+  int get hashCode => id;
+
+  @override
+  bool operator ==(Object other) => other is Item && other.id == id;
 }
