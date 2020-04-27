@@ -2,12 +2,10 @@ import 'package:delivecrous/common/colors.dart';
 import 'package:delivecrous/models/cart_model.dart';
 import 'package:delivecrous/models/catalog_model.dart';
 import 'package:delivecrous/screens/shop_cart.dart';
-
 import 'package:flutter/material.dart';
 import 'package:delivecrous/screens/details.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
-import 'dart:developer';
   
 class TileListItem extends StatelessWidget {
 

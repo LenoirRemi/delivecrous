@@ -4,7 +4,6 @@ import 'package:delivecrous/models/cart_model.dart';
 import 'package:delivecrous/common/colors.dart';
 import 'package:provider/provider.dart';
 
-
 class ShopCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

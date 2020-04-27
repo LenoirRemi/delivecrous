@@ -1,6 +1,5 @@
 import 'package:delivecrous/models/catalog_model.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:developer';
 
 class CartModel extends ChangeNotifier {
   CatalogModel _catalog;
