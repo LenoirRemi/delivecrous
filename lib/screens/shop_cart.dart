@@ -43,7 +43,7 @@ class ShopCart extends StatelessWidget {
                   flex: 9,
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 0,
                   child: Text(
                     "Total : " + cart.totalPrice.toStringAsFixed(2) + " €",
                     style: TextStyle(
@@ -53,7 +53,7 @@ class ShopCart extends StatelessWidget {
                   ), 
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 0,
                   child: Row(
                     children: [
                       Text("Où veut-tu te faire livrer ?",
