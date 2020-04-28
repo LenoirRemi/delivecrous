@@ -43,4 +43,6 @@ class CartModel extends ChangeNotifier {
     _itemIds.removeAt(index);
     notifyListeners();
   }
+
+  double get totalPrice => items.fold(0, (total, current) => total + current.price);
 }

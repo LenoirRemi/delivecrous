@@ -3,10 +3,12 @@ import 'package:delivecrous/screens/final.dart';
 import 'package:delivecrous/models/cart_model.dart';
 import 'package:delivecrous/common/colors.dart';
 import 'package:provider/provider.dart';
+import 'package:delivecrous/screens/details.dart';
 
 class ShopCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var cart = Provider.of<CartModel>(context);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
@@ -39,6 +41,13 @@ class ShopCart extends StatelessWidget {
                 Expanded(
                   child: _CartList(),
                 ),
+                Text(
+                  "Total : " + cart.totalPrice.toStringAsFixed(2) + " €",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white
+                  ),
+                ), 
                 Container(
                   child: Row(
                     children: [
@@ -158,11 +167,19 @@ class _CartList extends StatelessWidget {
           padding: EdgeInsets.only(left: 20, right: 20),
           child: Row(
             children: <Widget>[
-              Image(
-                image: AssetImage(cart.items[index].image),
-                alignment: Alignment.centerRight,
-                height: 60,
-                fit: BoxFit.scaleDown
+              InkWell(
+                child: Image(
+                  image: AssetImage(cart.items[index].image),
+                  alignment: Alignment.centerRight,
+                  height: 60,
+                  fit: BoxFit.scaleDown
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Details(index)),
+                  );
+                },
               ),
               Expanded(
                 child: Container(
