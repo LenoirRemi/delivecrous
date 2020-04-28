@@ -155,11 +155,36 @@ class _CartList extends StatelessWidget {
           color: Colors.black,
         ),
         itemCount: cart.items.length,
-        itemBuilder: (context, index) => ListTile(
-          title: Text(
-            cart.items[index].name,
+        itemBuilder: (context, index) => Container(
+          padding: EdgeInsets.only(left: 20, right: 20),
+          child: Row(
+            children: <Widget>[
+              Image(
+                image: AssetImage(cart.items[index].image),
+                alignment: Alignment.centerRight,
+                height: 60,
+                fit: BoxFit.scaleDown
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Text(
+                    cart.items[index].name,
+                  ),
+                )
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.remove_shopping_cart,
+                  color: Colors.black,
+                  size: 30.0,
+                ), onPressed: () {
+                  cart.removeAt(index);
+                },
+              )
+            ],
           ),
-        ),
+        )
       );
   }
 }
