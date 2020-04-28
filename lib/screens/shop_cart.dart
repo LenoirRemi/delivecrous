@@ -11,7 +11,7 @@ class ShopCart extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
-        title: Text("Shop Cart"),
+        title: Text("Delivecrous"),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -23,34 +23,31 @@ class ShopCart extends StatelessWidget {
           )
         ),
         child: Container(
-          margin: const EdgeInsets.all(10.0),
+          margin: EdgeInsets.all(10.0),
             child: Column(
               children: [
                 Container(
                   child: Row(
                     children: [
-                    Text("Panier",
-                      style: TextStyle(
-                        fontSize: 24,
+                      Text("Panier",
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
                       ),
-                    ),
                     ],
                   ),
                 ),
                 Expanded(
-                  child: Padding(
-                  padding: const EdgeInsets.all(32),
                   child: _CartList(),
-                ),
                 ),
                 Container(
                   child: Row(
                     children: [
-                    Text("Où veut-tu te faire livrer ?\nEn salle de TD?",
-                      style: TextStyle(
-                        fontSize: 20,
+                      Text("Où veut-tu te faire livrer ?\nEn salle de TD?",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
                     ],
                   ),
                 ),
@@ -117,9 +114,14 @@ class ShopCart extends StatelessWidget {
                   ],
                 ),
                 Container(
+                  padding: EdgeInsets.all(10.0),
                   child: Center(
                     child: RaisedButton(
-                      color: Colors.blueGrey,
+                      elevation: 8.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0)
+                      ),
+                      //color: Colors.blueGrey,
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -127,15 +129,15 @@ class ShopCart extends StatelessWidget {
                         );
                       },
                       child: 
-                        Text('Passez commande',
+                        Text('Passer commande',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           )
                         )
                       ),
                     ),
                   ),
-                ],
+              ],
             ),
             ),
           ),
@@ -148,7 +150,10 @@ class _CartList extends StatelessWidget {
   Widget build(BuildContext context) {
       var cart = Provider.of<CartModel>(context);
 
-      return ListView.builder(
+      return ListView.separated(
+        separatorBuilder: (context, index) => Divider(
+          color: Colors.black,
+        ),
         itemCount: cart.items.length,
         itemBuilder: (context, index) => ListTile(
           title: Text(
