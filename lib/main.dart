@@ -29,7 +29,7 @@ class Home extends StatelessWidget {
       ),
     ],
     child: MaterialApp(
-      title: 'APp title',
+      title: 'Delivecrous',
       initialRoute: '/',
       routes: {
           '/': (context) => MyListItem(),
