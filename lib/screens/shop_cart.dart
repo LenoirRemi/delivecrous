@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 class ShopCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
