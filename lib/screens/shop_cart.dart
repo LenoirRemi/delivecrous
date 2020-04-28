@@ -10,7 +10,7 @@ class ShopCart extends StatelessWidget {
   Widget build(BuildContext context) {
     var cart = Provider.of<CartModel>(context);
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: true,
       appBar: AppBar(
         title: Text("Delivecrous"),
       ),
@@ -40,18 +40,23 @@ class ShopCart extends StatelessWidget {
                 ),
                 Expanded(
                   child: _CartList(),
+                  flex: 9,
                 ),
-                Text(
-                  "Total : " + cart.totalPrice.toStringAsFixed(2) + " €",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white
-                  ),
-                ), 
-                Container(
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    "Total : " + cart.totalPrice.toStringAsFixed(2) + " €",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white
+                    ),
+                  ), 
+                ),
+                Expanded(
+                  flex: 1,
                   child: Row(
                     children: [
-                      Text("Où veut-tu te faire livrer ?\nEn salle de TD?",
+                      Text("Où veut-tu te faire livrer ?",
                         style: TextStyle(
                           fontSize: 20,
                         ),
