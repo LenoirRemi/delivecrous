@@ -182,7 +182,7 @@ class _CartList extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Details(index)),
+                    MaterialPageRoute(builder: (context) => Details(cart.items[index].id)),
                   );
                 },
               ),
