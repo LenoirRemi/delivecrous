@@ -1,7 +1,7 @@
 import 'package:delivecrous/common/colors.dart';
 import 'package:delivecrous/models/cart_model.dart';
 import 'package:delivecrous/models/catalog_model.dart';
-import 'package:delivecrous/screens/shop_cart.dart';
+import 'package:delivecrous/screens/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:delivecrous/screens/details.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -85,26 +85,12 @@ class TileListItem extends StatelessWidget {
   }
 }
 
-class MyListItem extends StatelessWidget {
+
+class MyListItem extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Delivecrous'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.shopping_cart,
-              color: Colors.white,
-              size: 34.0,
-            ), onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ShopCart()),
-              );
-            },
-          )],
-      ),
+    appBar: MyAppBar(),
     body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:delivecrous/screens/shop_cart.dart';
 import 'package:delivecrous/common/colors.dart';
 import 'package:delivecrous/models/catalog_model.dart';
 import 'package:delivecrous/models/cart_model.dart';
 import 'package:provider/provider.dart';
+import 'package:delivecrous/screens/app_bar.dart';
 
 class Details extends StatefulWidget {
   
@@ -41,22 +41,7 @@ class _DetailsState extends State<Details> {
     var item = catalog.getByPosition(widget.index);
     
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Delivecrous'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.shopping_cart,
-              color: Colors.white,
-              size: 34.0,
-            ), onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ShopCart()),
-              );
-            },
-          )],
-      ),
+      appBar: MyAppBar(),
       body: SizedBox.expand(
         child: Container(
           decoration: BoxDecoration(
